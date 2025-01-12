@@ -1,0 +1,190 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@hono/hono@^4.6.16": "4.6.16",
+    "npm:square@^39.1.1": "39.1.1"
+  },
+  "jsr": {
+    "@hono/hono@4.6.16": {
+      "integrity": "b540c6b1352d73142895f7bb6bfd0b6cc514ede61c12940338c4ae5dd06cb326"
+    }
+  },
+  "npm": {
+    "@apimatic/authentication-adapters@0.5.6": {
+      "integrity": "sha512-7/m+KLIpsiO83uWtCBRZKmpDtCLBoW5yIM9sOsHslI6RKbGWXu/cTnIE07nlrePLQhfX0+dO/Jl9vfFKIoLYzw==",
+      "dependencies": [
+        "@apimatic/core-interfaces",
+        "@apimatic/http-headers",
+        "@apimatic/http-query",
+        "tslib"
+      ]
+    },
+    "@apimatic/axios-client-adapter@0.3.8": {
+      "integrity": "sha512-nwarzOH9f3O28zRC2HCiP9jLisKIFMDnSFjkFXio/P7X9SOPyTaeTN4K5jiHlpq5O3gChSk26LXiyDIvG1JqVw==",
+      "dependencies": [
+        "@apimatic/convert-to-stream@0.1.4",
+        "@apimatic/core-interfaces",
+        "@apimatic/file-wrapper",
+        "@apimatic/http-headers",
+        "@apimatic/http-query",
+        "@apimatic/json-bigint",
+        "@apimatic/schema",
+        "axios",
+        "detect-browser",
+        "detect-node",
+        "form-data",
+        "lodash.flatmap",
+        "tiny-warning",
+        "tslib"
+      ]
+    },
+    "@apimatic/convert-to-stream@0.0.2": {
+      "integrity": "sha512-1DRg17ItExfMYsXwjt6WIjJSCgV5RGg3fHPLgYD44/YmiU+7suWj7YfPKKUqmNcnJ/AvMh4lG1+tHrfOT01zXw=="
+    },
+    "@apimatic/convert-to-stream@0.1.4": {
+      "integrity": "sha512-QlAUUN/NT4IbajpnFw+w+4GAPwuTtPAEUMBGGKX4M2XLuv8QA4Asag6V19gLsnWFdzcu7mwpjGn+O4tsOlArMQ==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@apimatic/core-interfaces@0.2.8": {
+      "integrity": "sha512-3o9CkUMeRrg8uE1dDqcvh3MOFIOPqdNRmpFEzhJa5oc0IqHHVhCSU21V9jBe0jB1+Zxc9uHWsq55QXFpliFq8Q==",
+      "dependencies": [
+        "@apimatic/file-wrapper",
+        "tslib"
+      ]
+    },
+    "@apimatic/core@0.10.17": {
+      "integrity": "sha512-8AHBm0Y0cjDDtJBgx+TkGXWLWadG+zltMiew7vmrADT8GGhKX/JfMV0R9ae+E1kmnF+C2g/IH/muNx6+HH15pA==",
+      "dependencies": [
+        "@apimatic/convert-to-stream@0.0.2",
+        "@apimatic/core-interfaces",
+        "@apimatic/file-wrapper",
+        "@apimatic/http-headers",
+        "@apimatic/http-query",
+        "@apimatic/json-bigint",
+        "@apimatic/schema",
+        "detect-browser",
+        "detect-node",
+        "form-data",
+        "json-ptr",
+        "lodash.defaultsdeep",
+        "lodash.flatmap",
+        "tiny-warning",
+        "tslib"
+      ]
+    },
+    "@apimatic/file-wrapper@0.3.4": {
+      "integrity": "sha512-XMY2Zh1pMOY1mGoz9axxR5Q5MDhdyArh2BxSfdJkRe76t2CiXdmw/+kPgBiX9QvXJXc0rcsDClqg4WMxamDepw==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@apimatic/http-headers@0.3.4": {
+      "integrity": "sha512-ECKyQt9QaRu8nwFJS50HMKKhs+lO191URDUQ5CRzgtGPudmrrmB35I1lz3oVjXelyoJANog2IEGhx3nqoSYD7Q==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@apimatic/http-query@0.3.4": {
+      "integrity": "sha512-6s5DS7dMq1lEJ+9AsTIiMyTXGX9xX5vOnduNSw8csSaQJ5lwMP4O4QzHFT3IFrvctKp/pfS75P0HYGV+9ciltg==",
+      "dependencies": [
+        "@apimatic/file-wrapper",
+        "tslib"
+      ]
+    },
+    "@apimatic/json-bigint@1.2.0": {
+      "integrity": "sha512-+bmVzYMdZu0Ya5L+my4FXFUih54OvQA/qlZsFOYdOoostyUuB27UDrVWQs/WVCmS0ADdo5vTU0eeTrrBkHoySw=="
+    },
+    "@apimatic/schema@0.7.15": {
+      "integrity": "sha512-wJVQPYYJwG9TuMJLvddH7VJ7x5tRK3ycZvcsheeEL9xD2BmTIV5w5ni14gjvmLIbivRsHmMcUkCVhIEssjg+Zg==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@types/node@14.18.63": {
+      "integrity": "sha512-fAtCfv4jJg+ExtXhvCkCqUKZ+4ok/JQk01qDKhL5BDDoS3AxKXhV5/MAVUZyQnSEd2GT92fkgZl0pz0Q0AzcIQ=="
+    },
+    "asynckit@0.4.0": {
+      "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
+    },
+    "axios@1.7.9": {
+      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "dependencies": [
+        "follow-redirects",
+        "form-data",
+        "proxy-from-env"
+      ]
+    },
+    "combined-stream@1.0.8": {
+      "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
+      "dependencies": [
+        "delayed-stream"
+      ]
+    },
+    "delayed-stream@1.0.0": {
+      "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ=="
+    },
+    "detect-browser@5.3.0": {
+      "integrity": "sha512-53rsFbGdwMwlF7qvCt0ypLM5V5/Mbl0szB7GPN8y9NCcbknYOeVVXdrXEq+90IwAfrrzt6Hd+u2E2ntakICU8w=="
+    },
+    "detect-node@2.1.0": {
+      "integrity": "sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g=="
+    },
+    "follow-redirects@1.15.9": {
+      "integrity": "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="
+    },
+    "form-data@4.0.1": {
+      "integrity": "sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==",
+      "dependencies": [
+        "asynckit",
+        "combined-stream",
+        "mime-types"
+      ]
+    },
+    "json-ptr@3.1.1": {
+      "integrity": "sha512-SiSJQ805W1sDUCD1+/t1/1BIrveq2Fe9HJqENxZmMCILmrPI7WhS/pePpIOx85v6/H2z1Vy7AI08GV2TzfXocg=="
+    },
+    "lodash.defaultsdeep@4.6.1": {
+      "integrity": "sha512-3j8wdDzYuWO3lM3Reg03MuQR957t287Rpcxp1njpEa8oDrikb+FwGdW3n+FELh/A6qib6yPit0j/pv9G/yeAqA=="
+    },
+    "lodash.flatmap@4.5.0": {
+      "integrity": "sha512-/OcpcAGWlrZyoHGeHh3cAoa6nGdX6QYtmzNP84Jqol6UEQQ2gIaU3H+0eICcjcKGl0/XF8LWOujNn9lffsnaOg=="
+    },
+    "mime-db@1.52.0": {
+      "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg=="
+    },
+    "mime-types@2.1.35": {
+      "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
+      "dependencies": [
+        "mime-db"
+      ]
+    },
+    "proxy-from-env@1.1.0": {
+      "integrity": "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg=="
+    },
+    "square@39.1.1": {
+      "integrity": "sha512-75b/UWbXl6xk1cG0jEWeWTRHAbDseF78kdPa3N4Cm57KMkDwOS2qGSLfooyqMDmFEKhQAfTA0WSiMkw40hQ/2A==",
+      "dependencies": [
+        "@apimatic/authentication-adapters",
+        "@apimatic/axios-client-adapter",
+        "@apimatic/core",
+        "@apimatic/json-bigint",
+        "@apimatic/schema",
+        "@types/node"
+      ]
+    },
+    "tiny-warning@1.0.3": {
+      "integrity": "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="
+    },
+    "tslib@2.8.1": {
+      "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@hono/hono@^4.6.16",
+      "npm:square@^39.1.1"
+    ]
+  }
+}
