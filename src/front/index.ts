@@ -1,3 +1,5 @@
+import "./index.css";
+
 import * as Square from "@square/web-sdk";
 import { expect, unwrap } from "../util.ts";
 import { Item, price } from "../product.ts";

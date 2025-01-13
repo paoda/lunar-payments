@@ -9,10 +9,20 @@
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.2",
     "@square/web-sdk": "npm:@square/web-sdk@^2.0.1",
     "@std/http": "jsr:@std/http@^1.0.12",
+    "autoprefixer": "npm:autoprefixer@^10.4.20",
+    "daisyui": "npm:daisyui@^4.12.23",
+    "postcss": "npm:postcss@^8.5.0",
     "square": "npm:square@^39.1.1",
+    "tailwindcss": "npm:tailwindcss@^3.4.17",
     "vite": "npm:vite@^6.0.7"
   },
   "compilerOptions": {
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "deno.ns"]
-  }
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "deno.ns"
+    ]
+  },
+  "nodeModulesDir": "auto"
 }
