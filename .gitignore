@@ -1,3 +1,5 @@
 .env
 .helix/
 .vscode/
+.vite/
+dist/

@@ -1,14 +1,18 @@
 {
   "tasks": {
-    "dev": "deno run --env-file --allow-env --allow-net --allow-read --watch src/back/main.tsx",
-    "start": "deno run --env-file --allow-env --allow-net --allow-read  src/back/main.ts"
+    "dev": "vite",
+    "build": "vite build",
+    "server:start": "deno run --env-file --allow-env --allow-net --allow-read  src/back/main.ts",
+    "serve": "deno task build && deno task server:start"
   },
   "imports": {
-    "hono": "jsr:@hono/hono@^4.6.16",
-    "square": "npm:square@^39.1.1"
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.2",
+    "@square/web-sdk": "npm:@square/web-sdk@^2.0.1",
+    "@std/http": "jsr:@std/http@^1.0.12",
+    "square": "npm:square@^39.1.1",
+    "vite": "npm:vite@^6.0.7"
   },
   "compilerOptions": {
-    "jsx": "precompile",
-    "jsxImportSource": "hono/jsx"
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "deno.ns"]
   }
 }
