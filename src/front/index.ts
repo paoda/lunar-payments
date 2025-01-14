@@ -50,7 +50,9 @@ dumpling.oninput = () => {
   totalSpan.innerHTML = `Total: $${decimal} CAD`;
 };
 
-const cardButton = unwrap(document.getElementById("card-button"));
+const cardButton = unwrap(
+  document.getElementById("card-button"),
+) as HTMLInputElement;
 const statusContainer = unwrap(
   document.getElementById("payment-status-container"),
 );
@@ -65,6 +67,8 @@ const statusContainer = unwrap(
   await card.attach("#card-container");
 
   cardButton.addEventListener("click", async () => {
+    cardButton.innerHTML = "<span class='loading'></span>";
+
     try {
       const result = await card.tokenize();
 
@@ -93,7 +97,13 @@ const statusContainer = unwrap(
           throw new Error(`${res.status}": Faulty Request`);
         }
 
-        console.debug(res);
+        cardButton.innerHTML = "Pay";
+
+        cardButton.remove();
+
+        statusContainer.classList.remove("alert-error");
+        statusContainer.classList.add("alert-success");
+        statusContainer.classList.replace("invisible", "visible");
 
         statusContainer.innerHTML = "Payment Successful";
       } else {
@@ -106,6 +116,13 @@ const statusContainer = unwrap(
       }
     } catch (e) {
       console.error(e);
+
+      cardButton.innerHTML = "Pay";
+
+      statusContainer.classList.remove("alert-success");
+      statusContainer.classList.add("alert-error");
+      statusContainer.classList.replace("invisible", "visible");
+
       statusContainer.innerHTML = "Payment Failed";
     }
   });

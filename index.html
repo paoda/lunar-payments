@@ -8,35 +8,38 @@
   <script type="module" src="src/front/index.ts"></script>
 </head>
 
-<body>
-  <form>
-    <div>
-      <label for="name">Enter your Name:</label>
-      <input type="text" name="name" id="name" required />
-    </div>
-    <div>
-      <label for="email">Enter your email:</label>
-      <input type="text" name="email" id="email" required />
-    </div>
-    <div>
-      <label for="reach">How did you hear about us?</label>
-      <input type="text" name="reach" id="reach" required />
+<body class="flex items-center justify-center w-screen h-screen">
+  <form class="flex bg-red flex-col rounded p-10 space-y-3">
+    <div class="flex flex-col space-y-3">
+      <label class="input input-bordered flex items-center gap-2" for="name">
+        Full Name
+        <input class="grow" type="text" name="name" id="name" placeholder="John Winnipeg" required />
+      </label>
+      <label class="input input-bordered flex items-center gap-2" for="email">
+        Email
+        <input class="grow" type="text" name="email" id="email" placeholder="your@email.ca" required />
+      </label>
+      <label class="input input-bordered flex items-center gap-2" for="reach">
+        How did you hear about us?
+        <input class="grow" type="text" name="reach" id="reach" placeholder="WCCCC" />
+        <span class="badge badge-info">Optional</span>
+      </label>
     </div>
     <div>
       <label for="tanghulu" id="tanghulu-price">Tanghulu</label>
-      <input type="number" name="tanghulu" id="tanghulu" placeholder="0">
-    </div>
-    <div>
+      <input class="input input-bordered" type="number" name="tanghulu" id="tanghulu" placeholder="0">
+
       <label for="dumpling" id="dumpling-price">Dumplings</label>
-      <input type="number" name="dumpling" id="dumpling" placeholder="0" />
+      <input class="input input-bordered" type="number" name="dumpling" id="dumpling" placeholder="0" />
     </div>
 
     <span id="total">Total:</span>
 
-    <div id="payment-form">
-      <div id="payment-status-container"></div>
-      <div id="card-container"></div>
-      <button id="card-button" type="button">Pay</button>
+    <div id="payment-form" class="flex flex-col">
+      <div id="card-container" class="mb-0 min-[565px]:mb-[43px] h-[97px] min-[565px]:h-[50px] rounded skeleton w-full">
+      </div>
+      <button id="card-button" class="btn btn-primary" type="button">Pay</button>
+      <div class="alert invisible" id="payment-status-container">I'm Hidden!</div>
     </div>
   </form>
 </body>
