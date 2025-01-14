@@ -3,8 +3,8 @@ import "./index.css";
 import * as Square from "@square/web-sdk";
 import { expect, unwrap } from "../util.ts";
 import { Item, price } from "../product.ts";
-import JustValidate from "just-validate";
 import { Rules } from "just-validate";
+import JustValidate from "just-validate";
 
 // @ts-ignore - Vite injects the Square App ID and Location ID
 const APP_ID = import.meta.env.VITE_SQUARE_APP_ID;
@@ -24,11 +24,9 @@ const tanghulu = document.querySelector("#tanghulu") as HTMLInputElement;
 const dumpling = document.querySelector("#dumpling") as HTMLInputElement;
 
 const cardButton = document.querySelector("#card-button") as HTMLInputElement;
-const statusContainer = unwrap(
-  document.querySelector("#payment-status-container"),
-);
+const toast = unwrap(document.querySelector("#payment-status"));
 
-const validator: JustValidate.default = new JustValidate(form, {
+const validator = new JustValidate(form, {
   validateBeforeSubmitting: true,
 });
 
@@ -69,6 +67,8 @@ dumpling.oninput = () => {
   await card.attach("#card-container");
 
   cardButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+
     cardButton.innerHTML = "<span class='loading'></span>";
 
     const result = await card.tokenize();
@@ -106,22 +106,23 @@ dumpling.oninput = () => {
       cardButton.innerHTML = "Pay";
       cardButton.disabled = true;
 
-      statusContainer.classList.remove("alert-error");
-      statusContainer.classList.add("alert-success");
-      statusContainer.classList.replace("invisible", "visible");
+      toast.classList.remove("hidden");
+      toast.children[0].classList.remove("alert-error");
+      toast.children[0].classList.add("alert-success");
 
-      statusContainer.innerHTML = "Payment Successful";
+      toast.children[0].innerHTML = "Payment Successful";
     } catch (e) {
       console.error(e);
-
       cardButton.innerHTML = "Pay";
 
-      statusContainer.classList.remove("alert-success");
-      statusContainer.classList.add("alert-error");
-      statusContainer.classList.replace("invisible", "visible");
+      toast.classList.remove("hidden");
+      toast.children[0].classList.remove("alert-success");
+      toast.children[0].classList.add("alert-error");
 
-      statusContainer.innerHTML = "Payment Failed";
+      toast.children[0].innerHTML = "Payment Failed";
     }
+
+    setInterval(() => toast.classList.add("hidden"), 10000);
   });
 })();
 

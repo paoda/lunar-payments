@@ -11,7 +11,7 @@
 <body class="flex items-center justify-center w-screen h-screen">
   <form class="flex bg-red flex-col rounded p-10 space-y-3">
     <div class="flex flex-col space-y-3">
-      <label class="input flex items-center gap-2" for="name">
+      <label class="input input-bordered flex items-center gap-2" for="name">
         Full Name
         <input class="grow" type="text" name="name" id="name" placeholder="John Winnipeg" required />
       </label>
@@ -39,9 +39,12 @@
       <div id="card-container" class="mb-0 min-[565px]:mb-[43px] h-[97px] min-[565px]:h-[50px] rounded skeleton w-full">
       </div>
       <button id="card-button" class="btn btn-primary" type="submit">Pay</button>
-      <div class="alert invisible" id="payment-status-container">I'm Hidden!</div>
     </div>
   </form>
+
+  <div id="payment-status" class="hidden toast toast-top toast-start">
+    <div class="alert">I'm Hidden!</div>
+  </div>
 </body>
 
 </html>
