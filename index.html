@@ -9,7 +9,7 @@
 </head>
 
 <body class="flex items-center justify-center w-screen h-screen">
-  <form class="flex bg-red flex-col rounded p-10 space-y-3">
+  <form class="flex flex-col rounded p-10 space-y-3 sm:w-1/3">
     <div class="flex flex-col space-y-3">
       <label class="input input-bordered flex items-center gap-2" for="name">
         Full Name
@@ -19,21 +19,30 @@
         Email
         <input class="grow" type="text" name="email" id="email" placeholder="your@email.ca" required />
       </label>
-      <label class="input input-bordered flex items-center gap-2" for="reach">
-        How did you hear about us?
-        <input class="grow" type="text" name="reach" id="reach" placeholder="WCCCC" />
-        <span class="badge badge-info">Optional</span>
-      </label>
+      <div class="flex flex-col gap-2">
+        <label class="" for="reach">How did you hear about us?</label>
+        <div class="input input-bordered flex items-center">
+          <input class="grow" type="text" name="reach" id="reach" placeholder="WCCCC">
+          <span class="badge badge-info">Optional</span>
+        </div>
+      </div>
+      </input>
     </div>
     <div>
-      <label for="tanghulu" id="tanghulu-price">Tanghulu</label>
+      <label for="tanghulu">Tanghulu</label>
       <input class="input input-bordered" type="number" name="tanghulu" id="tanghulu" placeholder="0">
-
-      <label for="dumpling" id="dumpling-price">Dumplings</label>
+      <span for="tanghulu" id="tanghulu-price">$0.00</span>
+    </div>
+    <div>
+      <label for="dumpling">Dumplings</label>
       <input class="input input-bordered" type="number" name="dumpling" id="dumpling" placeholder="0" />
+      <span for="tanghulu" id="dumpling-price">$0.00</span>
     </div>
 
-    <span id="total">Total:</span>
+    <div class="flex">
+      <span class="font-bold grow">Total:</span>
+      <span id="total">$0.00</span>
+    </div>
 
     <div id="payment-form" class="flex flex-col">
       <div id="card-container" class="mb-0 min-[565px]:mb-[43px] h-[97px] min-[565px]:h-[50px] rounded skeleton w-full">

@@ -36,25 +36,25 @@ validator
   .addField("#tanghulu", [{ rule: Rules.Number }])
   .addField("#dumpling", [{ rule: Rules.Number }]);
 
-tanghuluPrice.innerHTML = `Tanghulu: $${
-  Number(price(Item.Tanghulu) * 100n / 100n) / 100
-} CAD`;
+tanghuluPrice.innerHTML = `Tanghulu: ${
+  formatCurrency(bigToNumber(price(Item.Tanghulu)))
+}`;
 
-dumplingPrice.innerHTML = `Dumpling: $${
-  Number(price(Item.Dumpling) * 100n / 100n) / 100
-} CAD`;
+dumplingPrice.innerHTML = `Dumpling: ${
+  formatCurrency(bigToNumber(price(Item.Dumpling)))
+}`;
 
-const decimal = Number(updateTotal(tanghulu, dumpling) * 100n / 100n) / 100;
-totalSpan.innerHTML = `Total: $${decimal} CAD`;
+const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
+totalSpan.innerHTML = formatCurrency(decimal);
 
 tanghulu.oninput = () => {
-  const decimal = Number(updateTotal(tanghulu, dumpling) * 100n / 100n) / 100;
-  totalSpan.innerHTML = `Total: $${decimal} CAD`;
+  const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
+  totalSpan.innerHTML = formatCurrency(decimal);
 };
 
 dumpling.oninput = () => {
-  const decimal = Number(updateTotal(tanghulu, dumpling) * 100n / 100n) / 100;
-  totalSpan.innerHTML = `Total: $${decimal} CAD`;
+  const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
+  totalSpan.innerHTML = formatCurrency(decimal);
 };
 
 (async () => {
@@ -145,4 +145,15 @@ function updateTotal(
 
   return price(Item.Tanghulu) * BigInt(tCount) +
     price(Item.Dumpling) * BigInt(dCount);
+}
+
+function bigToNumber(num: bigint): number {
+  return Number(num * 100n / 100n) / 100;
+}
+
+function formatCurrency(decimal: bigint | number): string {
+  return Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+  }).format(decimal);
 }
