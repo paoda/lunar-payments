@@ -1,6 +1,6 @@
 // in cents
-const TANGHULU_PRICE = 100n; // FIXME: actual prices please
-const DUMPLING_PRICE = 150n;
+const TANGHULU_PRICE = 300n; // FIXME: actual prices please
+const DUMPLING_PRICE = 600n;
 
 export enum Item {
   Tanghulu,
