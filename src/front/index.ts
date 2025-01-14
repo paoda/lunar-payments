@@ -3,31 +3,40 @@ import "./index.css";
 import * as Square from "@square/web-sdk";
 import { expect, unwrap } from "../util.ts";
 import { Item, price } from "../product.ts";
+import JustValidate from "just-validate";
+import { Rules } from "just-validate";
 
 // @ts-ignore - Vite injects the Square App ID and Location ID
 const APP_ID = import.meta.env.VITE_SQUARE_APP_ID;
 // @ts-ignore - Vite injects the Square App ID and Location ID
 const LOC_ID = import.meta.env.VITE_SQUARE_LOC_ID;
 
-const name = document.getElementById("name") as HTMLInputElement;
-const email = document.getElementById("email") as HTMLInputElement;
-const reach = document.getElementById("reach") as HTMLInputElement;
-const totalSpan = unwrap(document.getElementById("total"));
-const tanghuluPrice = unwrap(document.getElementById("tanghulu-price"));
-const dumplingPrice = unwrap(document.getElementById("dumpling-price"));
+const form = document.querySelector("form") as HTMLFormElement;
 
-const tanghulu = document.getElementById(
-  "tanghulu",
-) as HTMLInputElement;
-const dumpling = document.getElementById(
-  "dumpling",
-) as HTMLInputElement;
+const name = document.querySelector("#name") as HTMLInputElement;
+const email = document.querySelector("#email") as HTMLInputElement;
+const reach = document.querySelector("#reach") as HTMLInputElement;
+const totalSpan = unwrap(document.querySelector("#total"));
+const tanghuluPrice = unwrap(document.querySelector("#tanghulu-price"));
+const dumplingPrice = unwrap(document.querySelector("#dumpling-price"));
 
-expect(name, "name <input /> should exist");
-expect(email, "email <input /> should exist");
-expect(reach, "reach <input /> should exist");
-expect(tanghulu, "tanghulu <input /> should exist");
-expect(dumpling, "dumpling <input /> should exist");
+const tanghulu = document.querySelector("#tanghulu") as HTMLInputElement;
+const dumpling = document.querySelector("#dumpling") as HTMLInputElement;
+
+const cardButton = document.querySelector("#card-button") as HTMLInputElement;
+const statusContainer = unwrap(
+  document.querySelector("#payment-status-container"),
+);
+
+const validator: JustValidate.default = new JustValidate(form, {
+  validateBeforeSubmitting: true,
+});
+
+validator
+  .addField("#name", [{ rule: Rules.Required }])
+  .addField("#email", [{ rule: Rules.Required }, { rule: Rules.Email }])
+  .addField("#tanghulu", [{ rule: Rules.Number }])
+  .addField("#dumpling", [{ rule: Rules.Number }]);
 
 tanghuluPrice.innerHTML = `Tanghulu: $${
   Number(price(Item.Tanghulu) * 100n / 100n) / 100
@@ -50,13 +59,6 @@ dumpling.oninput = () => {
   totalSpan.innerHTML = `Total: $${decimal} CAD`;
 };
 
-const cardButton = unwrap(
-  document.getElementById("card-button"),
-) as HTMLInputElement;
-const statusContainer = unwrap(
-  document.getElementById("payment-status-container"),
-);
-
 (async () => {
   const payments = expect<Square.Payments>(
     await Square.payments(APP_ID, LOC_ID),
@@ -66,54 +68,49 @@ const statusContainer = unwrap(
   const card = await payments.card();
   await card.attach("#card-container");
 
-  cardButton.addEventListener("click", async () => {
+  cardButton.addEventListener("click", async (e) => {
     cardButton.innerHTML = "<span class='loading'></span>";
 
+    const result = await card.tokenize();
+
+    if (result.status !== "OK" || !validator.isFormValid()) {
+      cardButton.innerHTML = "Pay";
+      return;
+    }
+
     try {
-      const result = await card.tokenize();
-
-      if (result.status === "OK") {
-        const res = await fetch("/payment/confirm", {
-          method: "POST",
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
+      const res = await fetch("/payment/confirm", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: result.token,
+          customer: {
+            name: name.value,
+            email: email.value,
+            reach: reach.value,
           },
-          body: JSON.stringify({
-            token: result.token,
-            customer: {
-              name: name.value,
-              email: email.value,
-              reach: reach.value,
-            },
-            order: {
-              tanghulu: tanghulu.value,
-              dumpling: dumpling.value,
-            },
-          }),
-        });
+          order: {
+            tanghulu: tanghulu.value,
+            dumpling: dumpling.value,
+          },
+        }),
+      });
 
-        if (res.status !== 200) {
-          throw new Error(`${res.status}": Faulty Request`);
-        }
-
-        cardButton.innerHTML = "Pay";
-
-        cardButton.remove();
-
-        statusContainer.classList.remove("alert-error");
-        statusContainer.classList.add("alert-success");
-        statusContainer.classList.replace("invisible", "visible");
-
-        statusContainer.innerHTML = "Payment Successful";
-      } else {
-        let err = `Tokenization failed with status: ${result.status}`;
-        if (result.errors) {
-          err += ` and errors: ${JSON.stringify(result.errors)}`;
-        }
-
-        throw new Error(err);
+      if (res.status !== 200) {
+        throw new Error(`${res.status}": Faulty Request`);
       }
+
+      cardButton.innerHTML = "Pay";
+      cardButton.disabled = true;
+
+      statusContainer.classList.remove("alert-error");
+      statusContainer.classList.add("alert-success");
+      statusContainer.classList.replace("invisible", "visible");
+
+      statusContainer.innerHTML = "Payment Successful";
     } catch (e) {
       console.error(e);
 

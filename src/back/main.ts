@@ -89,16 +89,16 @@ const handlePayment = async (req: Request) => {
     const token: string = expect<string>(body.token, "token should exist");
 
     const customer = body.customer as Customer;
-    expect(customer.name, "customer.name should exist");
-    expect(customer.email, "customer.email should exist");
+    unwrap(customer.name);
+    unwrap(customer.email);
+
+    const order = body.order as Order;
+    unwrap(order.tanghulu);
+    unwrap(order.dumpling);
 
     if (customer.name === "" || customer.email === "") {
       return new Response(null, { status: 400 });
     }
-
-    const order = body.order as Order;
-    expect(order.tanghulu, "order.tanghulu should exist");
-    expect(order.dumpling, "order.dumpling should exist");
 
     const cost = BigInt(order.tanghulu) * price(Item.Tanghulu) +
       BigInt(order.dumpling) * price(Item.Dumpling);
@@ -109,8 +109,11 @@ const handlePayment = async (req: Request) => {
       idempotencyKey: crypto.randomUUID(),
     });
 
-    // FIXME: what can reponse return here?
-    console.debug(response);
+    if (response.statusCode !== 200) {
+      throw new Error(
+        `SDK gave invalid HTTP code: ${response.statusCode}`,
+      );
+    }
 
     const finalCost = expect(
       result.payment?.amountMoney?.amount,

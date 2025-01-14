@@ -12,6 +12,7 @@
     "@std/http": "jsr:@std/http@^1.0.12",
     "autoprefixer": "npm:autoprefixer@^10.4.20",
     "daisyui": "npm:daisyui@^4.12.23",
+    "just-validate": "npm:just-validate@^4.3.0",
     "postcss": "npm:postcss@^8.5.0",
     "square": "npm:square@^39.1.1",
     "tailwindcss": "npm:tailwindcss@^3.4.17",
