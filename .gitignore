@@ -4,3 +4,4 @@
 .vite/
 dist/
 node_modules/
+**/*.db

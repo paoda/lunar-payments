@@ -13,6 +13,9 @@ const name = document.getElementById("name") as HTMLInputElement;
 const email = document.getElementById("email") as HTMLInputElement;
 const reach = document.getElementById("reach") as HTMLInputElement;
 const totalSpan = unwrap(document.getElementById("total"));
+const tanghuluPrice = unwrap(document.getElementById("tanghulu-price"));
+const dumplingPrice = unwrap(document.getElementById("dumpling-price"));
+
 const tanghulu = document.getElementById(
   "tanghulu",
 ) as HTMLInputElement;
@@ -25,6 +28,17 @@ expect(email, "email <input /> should exist");
 expect(reach, "reach <input /> should exist");
 expect(tanghulu, "tanghulu <input /> should exist");
 expect(dumpling, "dumpling <input /> should exist");
+
+tanghuluPrice.innerHTML = `Tanghulu: $${
+  Number(price(Item.Tanghulu) * 100n / 100n) / 100
+} CAD`;
+
+dumplingPrice.innerHTML = `Dumpling: $${
+  Number(price(Item.Dumpling) * 100n / 100n) / 100
+} CAD`;
+
+const decimal = Number(updateTotal(tanghulu, dumpling) * 100n / 100n) / 100;
+totalSpan.innerHTML = `Total: $${decimal} CAD`;
 
 tanghulu.oninput = () => {
   const decimal = Number(updateTotal(tanghulu, dumpling) * 100n / 100n) / 100;
@@ -97,10 +111,10 @@ const statusContainer = unwrap(
   });
 })();
 
-const updateTotal = (
+function updateTotal(
   tanghulu: HTMLInputElement,
   dumpling: HTMLInputElement,
-): bigint => {
+): bigint {
   let tCount: number = +tanghulu.value;
   let dCount: number = +dumpling.value;
 
@@ -116,4 +130,4 @@ const updateTotal = (
 
   return price(Item.Tanghulu) * BigInt(tCount) +
     price(Item.Dumpling) * BigInt(dCount);
-};
+}

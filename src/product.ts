@@ -18,6 +18,12 @@ export interface Order {
   dumpling: bigint;
 }
 
+export interface Payment {
+  square_id: string;
+  cost: bigint;
+  last_4: string;
+}
+
 export const price = (item: Item): bigint => {
   switch (item) {
     case Item.Tanghulu:
