@@ -36,23 +36,33 @@ validator
   .addField("#tanghulu", [{ rule: Rules.Number }])
   .addField("#dumpling", [{ rule: Rules.Number }]);
 
-tanghuluPrice.innerHTML = `Tanghulu: ${
-  formatCurrency(bigToNumber(price(Item.Tanghulu)))
-}`;
+(function setInitialValues() {
+  tanghuluPrice.innerHTML = formatCurrency(
+    bigToNumber(updateItem(tanghulu, Item.Tanghulu)),
+  );
 
-dumplingPrice.innerHTML = `Dumpling: ${
-  formatCurrency(bigToNumber(price(Item.Dumpling)))
-}`;
+  dumplingPrice.innerHTML = formatCurrency(
+    bigToNumber(updateItem(dumpling, Item.Dumpling)),
+  );
 
-const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
-totalSpan.innerHTML = formatCurrency(decimal);
+  const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
+  totalSpan.innerHTML = formatCurrency(decimal);
+})();
 
 tanghulu.oninput = () => {
+  tanghuluPrice.innerHTML = formatCurrency(
+    bigToNumber(updateItem(tanghulu, Item.Tanghulu)),
+  );
+
   const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
   totalSpan.innerHTML = formatCurrency(decimal);
 };
 
 dumpling.oninput = () => {
+  dumplingPrice.innerHTML = formatCurrency(
+    bigToNumber(updateItem(dumpling, Item.Dumpling)),
+  );
+
   const decimal = bigToNumber(updateTotal(tanghulu, dumpling));
   totalSpan.innerHTML = formatCurrency(decimal);
 };
@@ -125,6 +135,17 @@ dumpling.oninput = () => {
     setInterval(() => toast.classList.add("hidden"), 10000);
   });
 })();
+
+function updateItem(element: HTMLInputElement, item: Item): bigint {
+  let count: number = +element.value;
+
+  if (count < 0) {
+    count = 0;
+    element.value = "0";
+  }
+
+  return price(item) * BigInt(count);
+}
 
 function updateTotal(
   tanghulu: HTMLInputElement,
