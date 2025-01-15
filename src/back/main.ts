@@ -23,7 +23,7 @@ const DEFAULT_CURRENCY: string = "CAD";
 
 type SqliteId = { id: number };
 
-const db = new Database("sqlite.db");
+const db = new Database("./data/sqlite.db");
 
 db.prepare(
   `
