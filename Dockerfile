@@ -16,8 +16,5 @@ RUN deno install
 # Build frontend
 RUN deno task build
 
-# Expose port 8000
-EXPOSE 8000
-
 # Start the server
 CMD ["deno", "task", "server:start"]
