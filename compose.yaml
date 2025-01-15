@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  lunar-payments:
+  site:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,6 +10,11 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 750M
 volumes:
   lny_data:
     driver: local

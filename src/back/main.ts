@@ -15,6 +15,7 @@ import { expect, unwrap } from "../util.ts";
 const root = new URLPattern({ pathname: "/" });
 const payment = new URLPattern({ pathname: "/payment/confirm" });
 const assets = new URLPattern({ pathname: "/assets/*" });
+const health = new URLPattern({ pathname: "/health" });
 
 const env = Deno.env.get;
 const TOKEN = expect<string>(env("SQUARE_ACCESS_TOKEN"), "envvar should exist");
@@ -79,6 +80,7 @@ const fetch = async (req: Request) => {
   }
 
   if (payment.test(url)) return await handlePayment(req);
+  if (health.test(url)) return new Response("healthy", { status: 200 }); // Add health checks here
 
   return new Response("Not Found", { status: 404 });
 };
