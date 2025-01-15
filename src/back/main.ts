@@ -2,7 +2,14 @@ import { Client, Environment } from "square";
 import { serveDir, serveFile } from "@std/http";
 import { Database } from "@db/sqlite";
 
-import { Customer, Item, Order, Payment, price } from "../product.ts";
+import {
+  Customer,
+  Item,
+  Order,
+  Payment,
+  price,
+  withSquareFee,
+} from "../product.ts";
 import { expect, unwrap } from "../util.ts";
 
 const root = new URLPattern({ pathname: "/" });
@@ -105,7 +112,7 @@ const handlePayment = async (req: Request) => {
 
     const { result, ...response } = await paymentsApi.createPayment({
       sourceId: token,
-      amountMoney: { amount: cost, currency: DEFAULT_CURRENCY },
+      amountMoney: { amount: withSquareFee(cost), currency: DEFAULT_CURRENCY },
       idempotencyKey: crypto.randomUUID(),
     });
 

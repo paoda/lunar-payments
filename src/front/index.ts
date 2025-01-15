@@ -2,7 +2,7 @@ import "./index.css";
 
 import * as Square from "@square/web-sdk";
 import { expect, unwrap } from "../util.ts";
-import { Item, price } from "../product.ts";
+import { Item, price, withSquareFee } from "../product.ts";
 import { Rules } from "just-validate";
 import JustValidate from "just-validate";
 
@@ -144,7 +144,10 @@ function updateItem(element: HTMLInputElement, item: Item): bigint {
     element.value = "0";
   }
 
-  return price(item) * BigInt(count);
+  return withSquareFee(price(item) * BigInt(count), {
+    flat: 30n / 2n,
+    percent: 0.028,
+  });
 }
 
 function updateTotal(
@@ -164,8 +167,10 @@ function updateTotal(
     dumpling.value = "0";
   }
 
-  return price(Item.Tanghulu) * BigInt(tCount) +
+  const total = price(Item.Tanghulu) * BigInt(tCount) +
     price(Item.Dumpling) * BigInt(dCount);
+
+  return withSquareFee(total);
 }
 
 function bigToNumber(num: bigint): number {

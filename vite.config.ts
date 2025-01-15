@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [deno()],
   server: {
     proxy: {
-      "/payment": "http:/localhost:8000",
+      "/payment": "http://localhost:8000",
     },
   },
 });

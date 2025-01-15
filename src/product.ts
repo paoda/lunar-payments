@@ -32,3 +32,17 @@ export const price = (item: Item): bigint => {
       return DUMPLING_PRICE;
   }
 };
+
+export interface SquareFeeOptions {
+  percent: number;
+  flat?: bigint;
+}
+
+export const withSquareFee = (
+  price: bigint,
+  options: SquareFeeOptions = { percent: 0.028, flat: 30n },
+): bigint => {
+  const { flat, percent } = options;
+
+  return BigInt(Math.ceil(Number(price + (flat ?? 0n)) / (1 - percent)));
+};
