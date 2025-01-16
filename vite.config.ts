@@ -1,10 +1,21 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv, UserConfig } from "vite";
 import deno from "@deno/vite-plugin";
 
-const BASE_URL = Deno.env.get("BASE_URL");
-if (!BASE_URL) throw new Error("$BASE_URL must be set");
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, Deno.cwd());
+  if (env.VITE_BASE_URL == null) throw new Error("$VITE_BASE_URL must be set");
 
-export default defineConfig({
-  base: BASE_URL,
-  plugins: [deno()],
+  return {
+    base: env.VITE_BASE_URL,
+    // deno-lint-ignore no-explicit-any
+    plugins: [deno() as any],
+    server: {
+      proxy: {
+        "/payment/confirm": {
+          target: "http://localhost:8000",
+          changeOrigin: true,
+        },
+      },
+    },
+  } satisfies UserConfig;
 });

@@ -80,7 +80,7 @@ const fetch = async (req: Request) => {
   }
 
   if (payment.test(url)) return await handlePayment(req);
-  if (health.test(url)) return new Response("healthy", { status: 200 }); // Add health checks here
+  if (health.test(url)) return new Response("healthy", { status: 200 }); // TODO: Add health checks here
 
   return new Response("Not Found", { status: 404 });
 };
@@ -89,8 +89,6 @@ const handlePayment = async (req: Request) => {
   if (req.method !== "POST") {
     return new Response(null, { status: 405, headers: { "Allow": "POST" } });
   }
-
-  const { paymentsApi } = sq;
 
   try {
     const body = await req.json();
@@ -112,7 +110,7 @@ const handlePayment = async (req: Request) => {
     const cost = BigInt(order.tanghulu) * price(Item.Tanghulu) +
       BigInt(order.dumpling) * price(Item.Dumpling);
 
-    const { result, ...response } = await paymentsApi.createPayment({
+    const { result, ...response } = await sq.paymentsApi.createPayment({
       sourceId: token,
       amountMoney: { amount: withSquareFee(cost), currency: DEFAULT_CURRENCY },
       idempotencyKey: crypto.randomUUID(),
