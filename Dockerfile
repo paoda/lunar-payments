@@ -7,8 +7,11 @@ WORKDIR /app
 # Copy application files
 COPY . .
 
-# Set production environment
-ENV NODE_ENV=production
+ARG BASE_URL
+ARG NODE_ENV
+
+ENV BASE_URL $BASE_URL
+ENV NODE_ENV $NODE_ENV
 
 # Install dependencies
 RUN deno install

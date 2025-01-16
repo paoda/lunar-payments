@@ -3,6 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - BASE_URL=${BASE_URL}
+        - NODE_ENV=${NODE_ENV}
     ports:
       - "8081:8000"
     volumes:
